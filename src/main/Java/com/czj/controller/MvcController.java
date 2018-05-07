@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
+import javax.servlet.http.*;
 import java.util.*;
 
 @Controller
@@ -49,6 +50,33 @@ public class MvcController {
         map.put("time",new Date());
         map.put("name","Map");
         return "hello testMap";
+    }
+
+    //请求转发到controller(必须用forward)
+    @RequestMapping("/testForward2Action")
+    public ModelAndView TestForward2Action(HttpServletRequest req, ModelAndView mv) throws Exception{
+        mv.setViewName("forward:hello");
+        return mv;
+    }
+
+    //访问非视图解析器的视图时,用forward
+    @RequestMapping("/testForward2View")
+    public ModelAndView TestForward2View(HttpServletRequest req,ModelAndView mv) throws Exception{
+        mv.setViewName("forward:/WEB-INF/views/home.jsp");  //不添加前后缀
+        return mv;
+    }
+
+    //重定向到controller
+    @RequestMapping("/testRedirect2Action")
+    public ModelAndView TestRedirect2Action(HttpServletRequest req,ModelAndView mv) throws Exception{
+        mv.setViewName("redirect:hello");
+        return mv;
+    }
+
+    @RequestMapping("/test2View")
+    public ModelAndView Test2View(HttpServletRequest req,ModelAndView mv) throws Exception{
+        mv.setViewName("redirect:home.jsp");
+        return mv;
     }
 }
 
