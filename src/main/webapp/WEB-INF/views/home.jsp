@@ -10,5 +10,6 @@
 </head>
 <body>
 Hello My(czj) Spring MVC Demo<br>
+操作成功！当前页：${pageContext.request.requestURL} ,上一页： ${headerValues.get("Referer")}
 </body>
 </html>

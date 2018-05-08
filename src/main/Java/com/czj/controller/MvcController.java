@@ -4,9 +4,13 @@ import com.czj.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.*;
 
 import javax.servlet.http.*;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -77,6 +81,28 @@ public class MvcController {
     public ModelAndView Test2View(HttpServletRequest req,ModelAndView mv) throws Exception{
         mv.setViewName("redirect:home.jsp");
         return mv;
+    }
+
+    @RequestMapping(value = "/testUpload", method = RequestMethod.GET)
+    public  String TestUploadDemo() throws Exception{
+        return "uploadDemo";
+    }
+
+    @RequestMapping(value = "/testUploadAction",method = RequestMethod.POST)
+    public String TestUpload(HttpServletRequest req) throws Exception {
+        //MultipartHttpServletRequest mreq = (MultipartHttpServletRequest)req; //直接转换报RequestFacade cannot be cast to MultipartHttpServletRequest
+        MultipartResolver resolver = new CommonsMultipartResolver(req.getSession().getServletContext());
+        MultipartHttpServletRequest mreq = resolver.resolveMultipart(req);
+
+        MultipartFile file = mreq.getFile("myfile");
+        String fileName = file.getOriginalFilename();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        FileOutputStream fos = new FileOutputStream(req.getSession().getServletContext().getRealPath("/")+
+                "uploads/"+sdf.format(new Date())+fileName.substring(fileName.lastIndexOf('.')));
+        fos.write(file.getBytes());
+        fos.flush();
+        fos.close();
+        return "home";
     }
 }
 
