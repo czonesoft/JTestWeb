@@ -56,6 +56,37 @@ public class MvcController {
         return "hello testMap";
     }
 
+    @RequestMapping(value="/testparam")
+    public String testRequestParam(@RequestParam(value="id") Integer id,
+                                   @RequestParam(value="name")String name){
+        System.out.println(id+" "+name);
+        return "/home";
+    }
+
+    @RequestMapping(value="/user/{id}",method=RequestMethod.GET)
+    public String get(@PathVariable("id") Integer id){
+        System.out.println("get"+id);
+        return "/home";
+    }
+
+    @RequestMapping(value="/user/{id}",method=RequestMethod.POST)
+    public String post(@PathVariable("id") Integer id){
+        System.out.println("post"+id);
+        return "/home";
+    }
+
+    @RequestMapping(value="/user/{id}",method=RequestMethod.PUT)
+    public String put(@PathVariable("id") Integer id){
+        System.out.println("put"+id);
+        return "/home";
+    }
+
+    @RequestMapping(value="/user/{id}",method=RequestMethod.DELETE)
+    public String delete(@PathVariable("id") Integer id){
+        System.out.println("delete"+id);
+        return "/home";
+    }
+
     //请求转发到controller(必须用forward)
     @RequestMapping("/testForward2Action")
     public ModelAndView TestForward2Action(HttpServletRequest req, ModelAndView mv) throws Exception{

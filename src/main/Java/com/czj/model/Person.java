@@ -6,6 +6,7 @@ import org.springframework.format.annotation.NumberFormat;
 import java.util.Date;
 
 public class Person {
+    private Integer id;
     private String name;
     private int age;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -13,6 +14,17 @@ public class Person {
     @NumberFormat(pattern = "#,###.##")
     private Long salary;
 
+    public int getId() {
+        return id;
+    }
+    /**
+     * @Author: 陈震军
+     * @Description: fgdfg;
+     * @Date: 2018-5-8
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
