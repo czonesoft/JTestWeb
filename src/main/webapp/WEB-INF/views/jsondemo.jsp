@@ -11,8 +11,7 @@
         $.ajax({
             type:"post",
             url:"${pageContext.request.contextPath}/json/adduser",
-            date:{"id":1,"name":"czj"},
-            contentType:"application/json;charset=utf-8",
+            data:{"id":1,"name":"czj"},
             success:function (data) {
                 console.log(data);
             }
