@@ -10,6 +10,7 @@ import org.springframework.web.servlet.*;
 
 import javax.servlet.http.*;
 import java.io.FileOutputStream;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -18,7 +19,7 @@ import java.util.*;
 public class MvcController {
     //访问路径 host:port/hello/mvc
     @RequestMapping("/hello")
-    public String Hello(){
+    public String Hello() throws Exception{
         return "home";  //返回home.jsp
     }
 
@@ -134,6 +135,11 @@ public class MvcController {
         fos.flush();
         fos.close();
         return "home";
+    }
+
+    @RequestMapping("/testEx")
+    public void TestException() throws Exception{
+        throw new SQLException("测试异常捕获，只捕获SQL异常");
     }
 }
 
