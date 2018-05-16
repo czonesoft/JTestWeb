@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -25,8 +24,18 @@
     <mvc:resources location="/scripts/" mapping="/js/**"/>
     <!-- interceptor setting -->
     <mvc:interceptors>
-        <bean class="com.czj.interceptor.ContextInterceptor"></bean>
+        <bean id="czjContextInterceptor" class="com.czj.interceptor.ContextInterceptor"></bean>
     </mvc:interceptors>
+    <!-- make the jsp page can be visited -->
+    <mvc:view-controller path="/locale" view-name="locale"/>
+    <!--国际化配置-->
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang"/>
+        </bean>
+    </mvc:interceptors>
+    <!-- 自动对标注 @Autowired 的 Bean 进行注入 -->
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
     <!-- 日期统一转换 -->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
     <!--ViewResovlver启用。视图解析器 -->
@@ -39,6 +48,18 @@
     <!-- 上传设置-->
     <bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="102400000"></property>
+    </bean>
+    <!-- 国际化资源文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>properties.locale</value>
+            </list>
+        </property>
+    </bean>
+    <!-- 配置SessionLocaleResolver用于将Locale对象存储于Session中供后续使用 -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="zh_CN"/>
     </bean>
 
 </beans>
