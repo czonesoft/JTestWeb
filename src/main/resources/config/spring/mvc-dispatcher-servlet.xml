@@ -12,9 +12,12 @@
       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
     <!--激活@Required @Autowired,JSP250'S @PostConstruct, @PreDestroy @Resource等标注 -->
     <context:annotation-config/>
-    <!--DispatcherServlet上下文，仅仅搜索@Controller标注的类。不搜索其它搜索的类 -->
-    <context:component-scan base-package="com.czj.controller">
+    <!--DispatcherServlet上下文，仅仅搜索@Controller标注的类。不搜索其它搜索的类.指定要扫描的包,如果有多个可以用逗号隔开 -->
+    <context:component-scan base-package="com.czj.controller,com.czj.service,com.czj.model">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
     </context:component-scan>
     <!--启用HandlerMapping标签 -->
     <mvc:annotation-driven conversion-service="conversionService"/>

@@ -1,6 +1,8 @@
 package com.czj.controller;
 
 import com.czj.model.*;
+import com.czj.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -133,6 +135,15 @@ public class MvcController {
         fos.write(file.getBytes());
         fos.flush();
         fos.close();
+        return "home";
+    }
+
+    @Autowired
+    PersonService personService;
+
+    @RequestMapping("/testIoc")
+    public String TestIoc(){
+        personService.introduce();
         return "home";
     }
 }

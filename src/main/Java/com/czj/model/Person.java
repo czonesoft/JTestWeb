@@ -2,13 +2,15 @@ package com.czj.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 
+@Repository
 public class Person {
     private Integer id;
-    private String name;
-    private int age;
+    private String name = "陈一";
+    private int age = 22;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     @NumberFormat(pattern = "#,###.##")
