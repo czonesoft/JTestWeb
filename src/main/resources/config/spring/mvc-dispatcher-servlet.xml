@@ -8,7 +8,7 @@
       http://www.springframework.org/schema/context
       http://www.springframework.org/schema/context/spring-context.xsd
       http://www.springframework.org/schema/mvc
-      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!--激活@Required @Autowired,JSP250'S @PostConstruct, @PreDestroy @Resource等标注 -->
     <context:annotation-config/>
     <!--DispatcherServlet上下文，仅仅搜索@Controller标注的类。不搜索其它搜索的类.指定要扫描的包,如果有多个可以用逗号隔开 -->
@@ -25,13 +25,9 @@
     <mvc:resources location="/img/" mapping="/img/**"/>
     <mvc:resources location="/css/" mapping="/css/**"/>
     <mvc:resources location="/scripts/" mapping="/js/**"/>
-    <!-- interceptor setting -->
-    <mvc:interceptors>
-        <bean id="czjContextInterceptor" class="com.czj.interceptor.ContextInterceptor"></bean>
-    </mvc:interceptors>
     <!-- make the jsp page can be visited -->
     <mvc:view-controller path="/locale" view-name="locale"/>
-    <!--国际化配置-->
+    <!--国际化配置 interceptor setting-->
     <mvc:interceptors>
         <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="lang"/>
