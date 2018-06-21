@@ -2,6 +2,7 @@ package com.czj.controller;
 
 import com.czj.model.*;
 import com.czj.service.PersonService;
+import com.czj.service.TestCustomerAopAnno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -144,6 +145,15 @@ public class MvcController {
     @RequestMapping("/testIoc")
     public String TestIoc(){
         personService.introduce();
+        return "home";
+    }
+
+    @Autowired
+    TestCustomerAopAnno testAopAnno;
+
+    @RequestMapping("/testAopAnno")
+    public  String TestAopAnno(){
+        testAopAnno.show();
         return "home";
     }
 }

@@ -2,17 +2,20 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/context
       http://www.springframework.org/schema/context/spring-context.xsd
       http://www.springframework.org/schema/mvc
-      http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+
     <!--激活@Required @Autowired,JSP250'S @PostConstruct, @PreDestroy @Resource等标注 -->
     <context:annotation-config/>
     <!--DispatcherServlet上下文，仅仅搜索@Controller标注的类。不搜索其它搜索的类.指定要扫描的包,如果有多个可以用逗号隔开 -->
-    <context:component-scan base-package="com.czj.controller,com.czj.service,com.czj.model">
+    <context:component-scan base-package="com.czj.*">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
