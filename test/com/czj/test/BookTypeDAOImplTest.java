@@ -3,6 +3,7 @@ package com.czj.test;
 import com.czj.dao.BookTypeDAO;
 import com.czj.dao.BookTypeDAOImpl;
 import com.czj.mapper.BooktypesMapper;
+import com.czj.model.Booktypes;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -20,9 +21,9 @@ public class BookTypeDAOImplTest {
 
     @Test
     public void testGetAllBookTypes() {
-        List<BooktypesMapper> booktypes=bookTypeDao.getAllBookTypes();
-        for (BooktypesMapper bookType : booktypes) {
-            System.out.println(bookType);
+        List<Booktypes> booktypes=bookTypeDao.getAllBookTypes();
+        for (Booktypes bookType : booktypes) {
+            System.out.println(bookType.getId()+"|"+bookType.getTypename());
         }
         assertNotNull(booktypes);
     }

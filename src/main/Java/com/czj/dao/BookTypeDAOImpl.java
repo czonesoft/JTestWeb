@@ -1,13 +1,14 @@
 package com.czj.dao;
 
 import com.czj.mapper.BooktypesMapper;
+import com.czj.model.Booktypes;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
 public class BookTypeDAOImpl implements BookTypeDAO  {
     @Override
-    public List<BooktypesMapper> getAllBookTypes() {
+    public List<Booktypes> getAllBookTypes() {
         //获得会话对象
         SqlSession session=MyBatisUtil.getSession();
         try {

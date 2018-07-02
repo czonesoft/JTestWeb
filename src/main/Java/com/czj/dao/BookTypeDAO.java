@@ -1,6 +1,7 @@
 package com.czj.dao;
 
 import com.czj.mapper.*;
+import com.czj.model.Booktypes;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface BookTypeDAO {
     /*
      * 获得所有图书类型
      */
-    public List<BooktypesMapper> getAllBookTypes();
+    public List<Booktypes> getAllBookTypes();
 }

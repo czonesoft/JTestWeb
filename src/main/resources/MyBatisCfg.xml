@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!-- 指定数据库连接信息的位置 -->
-    <properties resource="classpath:properties/db.properties"/>
+    <properties resource="properties/db.properties"/>
     <!--类型别名，默认引入model下的所有类 -->
     <typeAliases>
         <package name="com.czj.model"/>
@@ -20,8 +20,9 @@
             </dataSource>
         </environment>
     </environments>
+    <!-- 引入映射文件-->
     <mappers>
-        <!--引入映射文件 -->
         <mapper resource="com/czj/mapper/BooktypeMapper.xml" />
     </mappers>
+
 </configuration>
